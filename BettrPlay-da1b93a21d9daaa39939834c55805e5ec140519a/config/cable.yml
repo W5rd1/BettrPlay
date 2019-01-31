@@ -1,0 +1,14 @@
+development:
+  adapter: async
+
+test:
+  adapter: async
+
+production:
+  adapter: redis
+  url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
+  channel_prefix: BettrPlay_production
+
+production:
+  adapter: redis
+  url: <%= ENV['redis://rediscloud:s49TwC8Z59F00UiIfYo6MzsPfd27H5ut@redis-15237.c6.eu-west-1-1.ec2.cloud.redislabs.com:15237'] %>

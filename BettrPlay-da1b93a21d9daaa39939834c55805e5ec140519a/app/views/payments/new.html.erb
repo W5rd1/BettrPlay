@@ -1,0 +1,26 @@
+<% @deposit = Deposit.find(params[:deposit_id]) %>
+  <div class="container-deposit">
+
+
+  <%= form_tag deposit_payments_path(@deposit) do %>
+    <h1>Deposit confirmation</h1>
+    <div class="deposit-form-container">
+      <div class="deposit-form">
+          <div class="thirddiv">
+            <p>You are depositing:</p>
+            <label class="amount">
+                <span><%= humanized_money_with_symbol(@deposit.amount) %></span>
+            </label>
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+              data-name="Deposit"
+              data-email="<%= current_user.email %>"
+              data-description="BettrPlay Deposit"
+              data-amount="<%= @deposit.amount_cents %>"
+              data-currency="<%= @deposit.amount.currency %>"></script>
+          </div>
+      </div>
+    </div>
+      <img src="https://upload.wikimedia.org/wikipedia/commons/5/5a/SNES-controller.png" alt="">
+  </div>
+<% end %>

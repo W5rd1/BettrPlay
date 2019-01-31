@@ -1,0 +1,22 @@
+<% @activities_all = PublicActivity::Activity.order("updated_at desc") %>
+<% @activities = @activities_all.select { |a| a.key == "challenge.create" || a.key == "challenge.accepted" || a.key == "challenge.won" } %>
+<% @activity_array = [] %>
+<% @activities.last(15).each do |activity| %>
+<% if activity.key == 'challenge.create' && activity.owner && activity.trackable.game %>
+<% @activity_array << "#{activity.owner.username} added a challenge for #{activity.trackable.game} at £#{activity.trackable.stake} \u{1f60e} || " %>
+<% elsif activity.key == '  challenge.accepted' && activity.owner && activity.trackable.game %>
+<% @activity_array << "#{activity.owner.username} accepted a challenge for #{activity.trackable.game} at £#{activity.trackable.stake} \u{1f91d} || " %>
+<% elsif activity.key == 'challenge.won' && activity.owner  && activity.trackable.game %>
+<% @activity_array << "#{activity.owner.username} won a challenge for #{activity.trackable.game} at £#{activity.trackable.stake} \u{1f911} || " %>
+<% else %>
+<% @activity_array << "Deposits bonus of £5 for Xmas - Back Yourself! \u{1f385} || " %>
+<% end %>
+<% end %>
+
+<div class="marquee">
+  <% 100.times do |p| %>
+  <p><%= @activity_array.join %></p>
+  <% end %>
+</div>
+
+

@@ -1,0 +1,36 @@
+.homepage-banner {
+  background: url("https://res.cloudinary.com/dacv2jb6y/image/upload/v1542971439/homepage-banner.jpg");
+  background-size: cover;
+  height: 85vh;
+  padding: 0;
+}
+
+.homepage-slogan {
+  padding: 10vh 20vw;
+  img {
+    color: white;
+    margin-top: 8vh;
+    margin-bottom: 1vh;
+  }
+  h3 {
+    padding-bottom: 2.5vh;
+    color: white;
+    font-weight: normal;
+  }
+}
+.homepage-images{
+  width: 250px;
+  padding-top: 150px;
+  margin: 0px 50px;
+  padding-bottom: 150px;
+}
+
+.homepage-info {
+  padding-top: 150px;
+  padding-right: 50px;
+  padding-left: 50px;
+
+  h2 {
+    margin-top: 0;
+  }
+}

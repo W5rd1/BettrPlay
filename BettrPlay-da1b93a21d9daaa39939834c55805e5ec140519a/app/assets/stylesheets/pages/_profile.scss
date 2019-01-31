@@ -1,0 +1,30 @@
+.banner-profile {
+  height: 40vh;
+  width: 100%;
+  background-image: url("http://www.nextgenav.com.au/wp-content/uploads/2018/03/Hex-background.jpg");
+  background-size: cover;
+
+}
+.profile-info {
+  box-shadow: 0 0 15px rgba(20,20,20,0.3);
+  top: 10px;
+  border: 2px;
+  padding: 5px;
+  height: auto;
+  background-color: white;
+.image {
+  text-align: center;
+}
+  img {
+    position: relative;
+    border-radius: 50%;
+    height: 150px;
+    top: -87px;
+
+  }
+}
+.deposit-form {
+  display: flex;
+  vertical-align: center;
+  text-align: center;
+}

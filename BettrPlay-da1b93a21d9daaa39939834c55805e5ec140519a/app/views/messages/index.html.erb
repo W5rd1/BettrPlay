@@ -1,0 +1,82 @@
+<div class="container">
+
+  <%= image_tag "chat.png", class: "messages-pic" %>
+
+  <div class="messages-intro">
+    <h3><%= "Chat With #{@chatroom.other_person(current_user, @chatroom).username}" %></h3>
+    <p>Arrange your matches in here. It's always good to exhange Gamer Tags so you can find each other on the relevant network (PSN, XBox Live or Steam etc.). Set a time and be there. Play fair! </p>
+    <p>
+      <% if @chatroom.users_in_challenge? == true %>
+        <h4><%= "You and #{@chatroom.other_person(current_user, @chatroom).username} are in challenge" %></h4>
+         <!--  (show a link to their open challenges) -->
+      <% else %>
+        Not In Challenge... Back Yourself!
+       <!--    (show challenge button  --- could auto send a message with a link to a newly created challenge only visible to that user????) -->
+      <% end %>
+    </p>
+
+      <%= link_to "My Challenges", challenges_path(user: @chatroom.other_person(current_user, @chatroom).id ), class: "btn btn-primary" %>
+      <%= link_to "Back to the challenge", :back, class: "btn btn-primary" %>
+  </div>
+
+  <div class="divider">
+  </div>
+
+  <div class="message-input">
+
+    <%= simple_form_for [@chatroom, Message.new] do |f| %>
+      <%= f.input :content, label: "Smack Talk" %>
+      <div id="message-button" class="relative-div">
+        <%= f.submit "Send!", class: "btn btn-primary position-right" %>
+      </div>
+    <% end %>
+  </div>
+
+
+  <h3>Messages</h3>
+
+  <% @messages.reverse.each do |message| %>
+
+    <% user = User.find(message.user_id) %>
+
+    <% if user == current_user %>
+
+  <div class="message-user">
+    <img class="avatar-large" src="https://kitt.lewagon.com/placeholder/users/gabriel-dehan">
+    <div class="message-body-user">
+      <p><strong><%= user.username %></strong></p>
+      <p>
+        <%= message.content %>
+      </p>
+    </div>
+    <div class="message-status-user">
+      <p>
+        <%= message.message_time %>
+        </p>
+      </p>
+    </div>
+  </div>
+
+  <% else %>
+
+  <div class="message-other-guy">
+      <!-- make message have position absolute -->
+      <img class="avatar-large" src="https://vanderbiltc4e.com/wp-content/uploads/2017/08/Super-Mario-Avatar-500x500-300x300.jpg">
+      <!-- make avatar have position relative and right: 24px; or something -->
+      <div class="message-body-other-guy">
+        <p><strong><%= user.username %></strong></p>
+        <p>
+          <%= message.content %>
+        </p>
+      </div>
+      <div class="message-status-other-guy">
+        <p class="status pending-other-guy">
+          <%= message.message_time %>
+          </p>
+        </p>
+      </div>
+    </div>
+    <% end %>
+  <% end %>
+</div>
+

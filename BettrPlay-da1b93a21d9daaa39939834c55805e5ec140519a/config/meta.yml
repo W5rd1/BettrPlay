@@ -1,0 +1,7 @@
+# config/meta.yml
+
+meta_product_name: "Bettrplay"
+meta_title: "Bettrplay - Back yourself on your favorite video games"
+meta_description: "Bettrplay let's you win real money by beating other players at your favorite computer games on Playstation, Xbox & PC!"
+meta_image: "OG_image.png"                       # should exist in `app/assets/images/`
+twitter_account: "@bettrply"   # required for Twitter Cards

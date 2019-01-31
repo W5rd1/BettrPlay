@@ -1,0 +1,45 @@
+.form-container {
+  display:flex;
+  flex-direction: column;
+  padding: 20px 0px;
+  .dropdowns {
+    display: flex;
+    justify-content: space-between;
+    height: 25%;
+  }
+  .gamertag {
+    height: 25%;
+  }
+  .form-desc {
+    height: 25%;
+  }
+  .form-btn {
+    height: 25%;
+  }
+}
+#deposit-alert {
+  color: red;
+  font-size: 12px;
+  margin-top: 0;
+  text-align: center;
+}
+.challenge_stake {
+  margin-bottom: 0 !important;
+}
+.input-fields {
+  color: black !important;
+  background-color: rgba(78,173,237, 0.1);
+  border-radius: 4px !important;
+  border: 1px solid #ccc !important;
+  font-size: 14px;
+}
+.rounded {
+  border-radius: 4px !important;
+}
+.game {
+  width: 32%;
+}
+
+.input-fields:focus {
+  border: 1px solid $blue !important;
+}

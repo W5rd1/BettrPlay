@@ -1,0 +1,49 @@
+<a href="/challenges/<%= challenge.id %>">
+  <div class="card">
+    <div class="card-body" style="background-image: linear-gradient(-225deg, rgba(255,255,255,0.5) 0%, rgba(255,255,255,0.5) 50%), url(<%= challenge.photo %>);">
+      <div class="card-platform">
+        <%= challenge.platform %>
+      </div>
+      <div class="card-stake">
+        £<%= challenge.stake %>
+      </div>
+      <div class="card-description text-center">
+        <div class="challenge-info">
+        <% if challenge.host.photo? %>
+          <%= image_tag "logo.png", alt: "alttext", class: "challenge-photo" %>
+          <% else %>
+          <%= cl_image_tag challenge.host.photo, class: "challenge-photo" %>
+          <% end %>
+          <div class= "text-play">
+            <p>Play</p>
+          </div>
+          <div class= "text-host">
+            <span><%= challenge.host_gamertag %></span>
+          </div>
+          <div class= "text-play">
+            <p>at</p>
+          </div>
+        </div>
+        <div class= "text-challenge">
+          <p><%= challenge.game %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</a>
+
+<!-- <div class="card">
+  <div class="card-body" style="background-image: url(<%= challenge.photo %>);">
+    <div class="card-platform">
+      <#%= challenge.platform %>
+    </div>
+    <div class="card-stake">
+      £<#%= challenge.stake %>
+    </div>
+    <div class="card-description text-center">
+      <span>User Online:<#%= challenge.host.online? %></span>
+</div>
+</div> -->
+
+<!--   </div> -->
+

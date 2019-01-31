@@ -1,0 +1,123 @@
+<div class="container-main">
+  <div class="container-flex">
+    <div class="photo-div">
+      <%= cl_image_tag @challenge.photo, class: "show-img" %>
+    </div>
+    <div class="information">
+      <div class="top-line">
+        <div class="game-div">
+          <p>Game:<p>
+          <h3><%= @challenge.game %></h3>
+        </div>
+        <div class="time_remaining-div">
+          <p>Time remaining:</p>
+          <div class="test"> <%= @challenge.time_remaining %></div>
+          <% if current_user == @challenge.host %>
+            <%= link_to 'Add time', add_time_challenge_path(@challenge), method: :patch, class: "btn btn-primary", id: "time"  %>
+          <% end %>
+        </div>
+      </div>
+      <div class="profile-div">
+        <div class="avatar-div">
+          <% if @challenge.host.photo? %>
+            <%= cl_image_tag @challenge.host.photo, class: "avatar" %>
+          <% else %>
+            <%= image_tag "https://vanderbiltc4e.com/wp-content/uploads/2017/08/Super-Mario-Avatar-500x500-300x300.jpg", class: "avatar" %>
+          <% end %>
+        </div>
+        <div class="name-div">
+          <p>Hostgamer tag:</p>
+          <h3><%= @challenge.host_gamertag %></h3>
+        </div>
+      </div>
+      <div class="price-div">
+        <p>Stake:</p>
+        <h1><%= humanized_money_with_symbol(@challenge.stake) %></h1>
+      </div>
+      <div class="description-div">
+        <p>Description:</p>
+        <h3><%= @challenge.description %></h3>
+      </div>
+      <div class="buttonz-div">
+        <% if @challenge.host == current_user && @challenge.status == "open" %>
+            <%= link_to "Edit", edit_challenge_path(@challenge), class: 'btn btn-primary pad' %>
+            <%= link_to "Delete", @challenge, method: :delete, class: 'btn btn-primary pad' %>
+        <% elsif @challenge.guest_id.nil? && @challenge.host != current_user %>
+           <button type="button" class="btn btn-primary pad", id="" data-toggle="modal" data-target="#exampleModalCenter">Accept Challenge</button>
+        <% elsif !@challenge.guest.nil? && !@challenge.host.nil? && current_user == @challenge.guest %>
+          <%= link_to "Host Won", challenge_host_win_path(@challenge), class: "btn btn-primary pad" %>
+          <%= link_to "Guest Won", challenge_host_lost_path(@challenge), class: "btn btn-primary pad" %>
+          <%= link_to "Leave", challenge_guest_left_path(@challenge), class: 'btn btn-primary pad' %>
+        <% elsif !@challenge.guest.nil? && !@challenge.host.nil? && current_user == @challenge.host %>
+          <%= link_to "Host Won", challenge_host_win_path(@challenge), class: "btn btn-primary pad" %>
+          <%= link_to "Guest Won", challenge_host_lost_path(@challenge), class: "btn btn-primary pad" %>
+        <% end %>
+        <%= link_to "Back", challenges_path, class: 'btn btn-primary pad' %>
+        <div id="deposit-alert"></div>
+      </div>
+    </div>
+  </div>
+</div>
+<%= render "shared/confirmmodal" %>
+<% if user_signed_in? %>
+  <script>
+  function toDateTime(secs) {
+    var t = new Date(1970, 0, 1); // Epoch
+    t.setSeconds(secs);
+    return t;
+}
+  var countdown_divs = document.querySelectorAll(".test")
+  console.log(countdown_divs)
+countdown_divs.forEach((div) => {
+  var dateOff = new Date().getTimezoneOffset() * -1
+  var countDownDate = new Date(toDateTime(div.innerHTML)).getTime() - (dateOff * 60 * 1000);
+  // Update the count down every 1 second
+  var x = setInterval(function() {
+    // Get todays date and time
+    var date = new Date()
+    var dtrue = date.toLocaleString('en-UK', {timeZone: "Europe/London" })
+    var now = new Date(dtrue).getTime();
+
+    // Find the distance between now an the count down date
+    var distance = countDownDate - now;
+
+    // Time calculations for days, hours, minutes and seconds
+    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+    // Display the result in the element with id="demo"
+    div.innerHTML = days + "d " + hours + "h "
+    + minutes + "m " + seconds + "s ";
+    // If the count down is finished, write some text
+    if (distance < 0) {
+      clearInterval(x);
+      div.innerHTML = "";
+    }
+    if (distance > 86394000 && <%= current_user == @challenge.host %>) {
+      var button = document.getElementById("time").disabled = true;
+      var button = document.getElementById("time").style.opacity = 0.2;
+    } else if (distance <= 86394000 && <%= current_user == @challenge.host %>) {
+      var button = document.getElementById("time").disabled = false;
+      var button = document.getElementById("time").style.opacity = 1;
+    }
+
+  }, 1000);
+});
+if (<%= current_user != @challenge.host && @challenge.guest.nil? %>) {
+  var button = document.querySelector(".form-btn");
+  console.log(button)
+    if (<%= @challenge.stake %> > <%= current_user.balance %> && <%= current_user != @challenge.host %> ) {
+      document.querySelector(".modal-btns").insertAdjacentHTML('beforeend', '<div id="deposit-alert">You do not have enough money in your account, please deposit ' + '<%= link_to "here", new_deposit_path %></div>')
+      button.href = "#";
+      button.style.opacity = 0.2;
+    } else {
+      document.getElementById("deposit-alert").innerHTML = "";
+      button.disabled = false;
+      button.style.opacity = 1;
+    };
+  };
+</script>
+<% end %>
+

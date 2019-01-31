@@ -1,0 +1,26 @@
+<div class="banner-profile">
+</div>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <div class="profile-info">
+        <div class="image"><%= cl_image_tag current_user.photo %></div>
+        <h1><%= @user.username %></h1>
+        <h2>Name</h2>
+        <p><%= @user.first_name %> <%= @user.last_name %></p>
+        <h2>Email</h2>
+        <p><%= @user.email %></p>
+        <h2>Rank</h2>
+        <p><%= @user.rank %></p>
+        <h2>Region</h2>
+        <p><%= @user.region %></p>
+        <h2>Bio</h2>
+        <p><%= @user.bio %></p>
+        <p><%= @user.balance %></p>
+<!--         <div class="deposit">
+ -->          <%= link_to "Deposit", new_deposit_path, class: 'btn btn-primary' %>
+        <!-- </div> -->
+      </div>
+  </div>
+</div>
+
+

@@ -1,0 +1,25 @@
+<div class="challenge-results">
+  <% if @challenges.empty? %>
+    <div class="jumbotron">
+      <h1 class="display-4">No challenge found!</h1>
+      <p class="lead">Click below button to see all available challenges to join.</p>
+      <hr class="my-4">
+      <p class="lead">
+        <a class="btn btn-primary btn-lg" href="/challenges" role="button">All challenges</a>
+      </p>
+    </div>
+  <% else %>
+    <div class="row">
+      <% @challenges.each do |challenge| %>
+      <div class="col-xs-4">
+        <%= render "shared/card", challenge: challenge %>
+      </div>
+
+      <% end %>
+    </div>
+
+  <% end %>
+
+
+
+</div>

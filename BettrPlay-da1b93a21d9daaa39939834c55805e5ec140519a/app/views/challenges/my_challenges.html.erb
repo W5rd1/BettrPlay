@@ -1,0 +1,48 @@
+<div class="container container-show">
+  <ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#home">Accepted Challenges</a></li>
+    <li><a data-toggle="tab" href="#menu1">Hosted Challenges</a></li>
+    <li><a data-toggle="tab" href="#menu2">Closed Challenges</a></li>
+  </ul>
+
+  <div class="tab-content">
+    <div id="home" class="tab-pane fade in active">
+        <div class="accepted-challenges">
+          <% if @accepted_challenges.empty? %>
+          <h2>No accepted challenge found</h2>
+          <% else %>
+          <% @accepted_challenges.each do |challenge| %>
+          <div class="col-xs-4">
+          <%= render "shared/card", challenge: challenge %>
+          </div>
+          <% end %>
+          <% end  %>
+      </div>
+    </div>
+    <div id="menu1" class="tab-pane fade">
+      <div class="hosted-challenges">
+
+        <% @hosted_challenges.each do |challenge| %>
+        <div class="col-xs-4">
+          <%= render "shared/card", challenge: challenge %>
+        </div>
+        <% end %>
+
+      </div>
+    </div>
+    <div id="menu2" class="tab-pane fade">
+      <div class="closed-challenges">
+        <% if @closed_challenges.empty? %>
+          <h2>no challenge history</h2>
+        <% else %>
+
+        <% @closed_challenges.each do |challenge| %>
+        <div class="col-xs-4">
+          <%= render "shared/card", challenge: challenge %>
+        </div>
+        <% end %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

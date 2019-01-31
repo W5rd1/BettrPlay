@@ -1,0 +1,155 @@
+<div class="container">
+  <!-- <div class="row"> -->
+  <div class="chatroom-div">
+  <div class="sidebar-inbox">
+    <div class="chat-header">
+        <%= image_tag "gamer-angry", class: "avatar-msg" %>
+        <h4><%= "Your Chats" %></h4>
+      </div>
+  <% @chatrooms.each do |chat| %>
+  <% user = chat.other_person(current_user, chat) %>
+  <a href="/chatrooms/<%="#{chat.id}"%>" class="messages-link">
+    <% if chat.id == params[:id].to_i %>
+    <div class="message active">
+    <% else %>
+    <div class="message">
+    <% end %>
+      <div class=""></div>
+      <img class="avatar-large-messages" src="https://kitt.lewagon.com/placeholder/users/gabriel-dehan">
+      <div class="message-sender-information">
+        <div class="message-name">
+          <h3 class="no-margins"><%= user.username %></h3>
+          <p class="no-margins dark-grey-text"><%= chat.messages.last.message_time %></p>
+        </div>
+        <div class="message-body">
+          <p>
+            <%= chat.messages.last.content.first(70) %>...
+          </p>
+        </div>
+        <div class="message-status">
+          <p class="message-status">
+            <% if chat.messages.last.read == true %>
+              Read All
+            <% else %>
+              Unread Messages
+            <% end %>
+          </p>
+          <p class="users-in-challenge">
+            <% if chat.users_in_challenge? == true %>
+              In Challenge
+            <% else %>
+              Not In Challenge
+            <% end %>
+          </p>
+        </div>
+      </div>
+    </div>
+  <% end %>
+  </a>
+</div>
+
+    <!-- <div class="col-xs-6 col-xs-offset-1"> -->
+      <div class="chat-box">
+      <div class="chat-header">
+        <%= image_tag "gamer-angry", class: "avatar-msg" %>
+        <h4><%= "Chat With #{@chatroom.other_person(current_user, @chatroom).username}" %></h4>
+      </div>
+        <div class="messages">
+          <% @chatroom.messages.each do |message| %>
+          <%= render "messages/message", message: message, user_is_messages_author: message.user == current_user %>
+          <% end %>
+        </div>
+        <div id="create-message">
+          <%= simple_form_for [ @chatroom, Message.new ], remote: true, html: { autocomplete: 'off' } do |f| %>
+          <%= f.input :content, as: :string, label: false %>
+          <%= f.submit class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+      </div>
+      <!-- </div> -->
+    <!-- </div> -->
+  </div>
+
+  <% content_for :after_js do %>
+  <script>
+    let messagesContainer, input
+   // scrollLastMessageIntoView();
+   App['chatroom_<%= @chatroom.id %>'] = App.cable.subscriptions.create({ channel: 'ChatroomsChannel', chatroom_id: <%= @chatroom.id %> }, {
+    received: (data) => {
+      if (data.current_user_id !== <%= current_user.id %>) {
+        messagesContainer = document.querySelector('.messages');
+        messagesContainer.insertAdjacentHTML('beforeend', data.message_partial);
+        // scrollLastMessageIntoView();
+      }
+    }
+  });
+</script>
+<% end %>
+
+
+
+
+
+<!--
+<div class="container">
+
+  <h1>Inbox</h1>
+  <p>Message other players here! Find opponents, coordinate games and generally shoot the shit...</p>
+  <p>Smack talking is welcome but abuse is not. Enjoy! </p><br>
+
+  <#% @chatrooms.each do |chat| %>
+  <#% user = chat.other_person(current_user, chat) %>
+  <a href="/chatrooms/<#%="#{chat.id}"%>/messages" class="messages-link">
+    <div class="message">
+      <img class="avatar-large-messages" src="https://kitt.lewagon.com/placeholder/users/gabriel-dehan">
+      <div class="message-name">
+        <h3><%= user.username %></h3>
+        <p><%= chat.messages.last.message_time %></p>
+      </div>
+      <div class="message-body">
+        <p>
+          <#%= chat.messages.last.content.first(70) %>...
+        </p>
+      </div>
+      <div class="message-status">
+        <p class="status pending">
+          <#% if chat.messages.last.read == true %>
+            Read All
+          <#% else %>
+            Unread Messages
+          <#% end %>
+        </p>
+        <p class="price">
+          <#% if chat.users_in_challenge? == true %>
+            In Challenge
+          <#% else %>
+            Not In Challenge
+          <#% end %>
+        </p>
+      </div>
+    </div>
+  <#% end %>
+  </a>
+</div>
+
+
+ -->
+
+<!-- other code -->
+
+<!--     <div class="sidebar-inbox">
+      <#% @chatrooms.each do |chat| %>
+      <#% user = chat.other_person(current_user, chat) %>
+      <div class="other-person-chatroom">
+        <div class="avatar-msg">
+          <#%= image_tag "gamer-angry", class: "avatar-msg" %>
+        </div>
+        <div class="ch"></div>
+      <h3><%= user.username %></h3>
+      <p><%= chat.messages.last.message_time %></p>
+      <a href="/chatrooms/<#%="#{chat.id}"%>" class="messages-link">chat</a>
+      <#% end %>
+      </div>
+    </div>
+    </div> -->

@@ -1,0 +1,166 @@
+// inbox styling
+.sidebar-inbox {
+  flex: 0 0 auto;
+  background-color: #ffffff;
+  border: 1px solid #ececec;
+  max-height: calc(70vh - 65px - 20px - 36px - 5px);
+  overflow-y: scroll;
+  margin-right: 30px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+}
+
+.messages-link:hover {
+  text-decoration: none;
+  .message {
+  background-color: #F2F9FC;
+  border-radius: 10px;
+  }
+  .message-body p {
+  font-weight: bold;
+  }
+  .message-name h3 {
+  color: #4EADED;
+  }
+  .avatar-large-messages {
+  border: #4EADED 1px solid;
+  }
+}
+.message {
+  display: flex;
+  align-items: space-between;
+  padding: 20px 5px;
+  border-bottom: 1px solid rgba(220,224,244,0.4);
+}
+
+.message-status {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.message:last-child {
+  border-bottom: none;
+}
+.message-body {
+  flex-grow: 1;
+  margin-right: 5px;
+}
+.message-name {
+  display: flex;
+  justify-content: space-between;
+  padding-left: 10px;
+  min-width: 100px;
+  width: 325px;
+}
+.message-name h3 {
+  font-size: 16px;
+  margin-bottom: 0px;
+}
+.message-name p {
+  font-size: 12px;
+  font-weight: lighter;
+  opacity: 0.6;
+  margin-top: 5px;
+  // color: #4EADED;
+}
+.message-body {
+  padding-left: 10px;
+  font-size: 16px;
+  color: rgba(0,0,0,0.7);
+}
+.message-body {
+  padding-left: 20px;
+  color: rgba(0,0,0,0.4);
+}
+.message-body strong{
+  color: rgba(0,0,0,0.9);
+  color: rgba(0,0,0,0.9);
+}
+.message-body p {
+  margin: 6px 0;
+  font-size: 16px;
+}
+.message-status {
+  font-size:10px;
+  margin: 4px;
+  color: #4EADED;
+}
+
+.users-in-challenge{
+  font-size: 10px;
+  color: #4EADED;
+  margin: 4px;
+}
+
+.avatar-large-messages {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+  border: white 1px solid;
+}
+
+.active {
+  background-color: #F2F9FC;
+  color: #8c8c8c;
+  h3{
+    color:#8c8c8c;
+  }
+  p{
+    color:#8c8c8c;
+  }
+}
+
+// For messages in chatroom from user
+// .message {
+//   display: flex;
+//   align-items: center;
+//   padding: 20px;
+//   border-bottom: 1px solid rgba(220,224,244,0.4);
+// }
+.message:last-child {
+  border-bottom: none;
+}
+.message-body {
+  flex-grow: 1;
+}
+
+.no-margins {
+  margin: 0
+}
+
+.dark-grey-text {
+  color: rgb(60,60,60)
+}
+
+.notify-msg {
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 10px;
+  font-weight: bold;
+  height: 20px;
+  background-color: red;
+  border-radius: 50%;
+  width:20px;
+}
+
+.message-nav-new {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+// For messages in chatroom from other guy
+
+
+
+
+
+
+
+
+
+
+
+

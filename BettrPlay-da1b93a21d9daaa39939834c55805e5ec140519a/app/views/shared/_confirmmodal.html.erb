@@ -1,0 +1,30 @@
+<div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered modal-dimensions" role="document">
+    <div class="modal-content">
+      <div class="mikes-modal">
+        <div class="modal-information">
+          <div class="title">
+            <h1>Almost there...</h1>
+          </div>
+          <div class="text-body">
+            <p>You are about to put your money where your mouth is..</p>
+            <p>Game: <%= @challenge.game %></p>
+            <p>Platform: <%= @challenge.platform %></p>
+            <h1>Game on...</h1>
+          </div>
+          <div class="price">
+            <h1><%= humanized_money_with_symbol(@challenge.stake) %></h1>
+          </div>
+          <div class="modal-btns" id="disable">
+            <%= link_to "Let's go!", challenge_set_guest_path(@challenge), class: 'btn btn-primary form-btn' %>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+        <div class="modal-image">
+          <%= cl_image_tag @challenge.photo %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

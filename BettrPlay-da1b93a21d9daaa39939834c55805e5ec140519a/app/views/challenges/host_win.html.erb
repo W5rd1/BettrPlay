@@ -1,0 +1,11 @@
+<div class="container">
+  <div class="row">
+    <div>
+      <% if current_user == @challenge.host %>
+      <%= render "shared/won_page" %>
+      <% else %>
+      <%= render "shared/lost_page" %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,4 @@
+<div class="message-ac <%= user_is_messages_author ? "right" : "" %>">
+  <%= image_tag 'logo.png', size: "50x50", class: "avatar.msg" %>
+  <div class="message-content"><%= message.content %></div>
+</div>

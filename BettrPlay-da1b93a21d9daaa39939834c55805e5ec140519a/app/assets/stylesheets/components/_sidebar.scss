@@ -1,0 +1,39 @@
+.sidebar {
+  width: 15%;
+  height: 100%;
+  margin-left: 20px;
+  position: fixed;
+  // box-shadow: 2px 0 0 rgba(50,50,50,0.5);
+  .games-list{
+    padding-left: 0;
+  }
+  .search-gamer-tag {
+    margin-top: 20px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+  } #min {
+    border-radius: 20px;
+    display: inline;
+  } #max {
+    border-radius: 20px;
+    display: inline;
+  } #search-button {
+    margin-top: 20px;
+  }
+.badge {
+  background-color: $orange;
+}
+}
+.min-field {
+  width: 45%;
+}
+.max-field {
+  width: 45%;
+}
+.margin-right {
+  margin-right: 10px;
+}
+.min-max {
+  display: flex;
+  justify-content: space-between;
+}

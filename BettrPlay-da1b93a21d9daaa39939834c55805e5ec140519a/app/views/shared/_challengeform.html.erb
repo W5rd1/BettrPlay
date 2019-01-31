@@ -1,0 +1,41 @@
+<div class="form-container">
+  <%= simple_form_for @challenge do |f| %>
+    <div class="gamertag"><%= f.input :host_gamertag, placeholder: 'Enter your gamertag', label: false, input_html: { class: "input-fields" } %></div>
+    <div class="dropdowns">
+      <div class="game">
+        <%= f.input :stake, placeholder: 'Choose stake', label: false, input_html: { class: "input-fields" } %>
+      </div>
+      <div class="game">
+        <%= f.input :game, collection: ["COD", "CS:GO", "Fifa", "Fortnite"], label: false, input_html: { class: "input-fields" } %>
+      </div>
+      <div class="game">
+        <%= f.input :platform, collection: ["PS4", "XBOX", "PC"], label: false, input_html: { class: "input-fields" } %>
+      </div>
+    </div>
+    <div class="form-desc">
+      <%= f.input :description, placeholder: 'Describe your event', label: false, input_html: { class: "input-fields" } %>
+    </div>
+    <div class="form-btn">
+      <%= f.button :submit, class: "btn btn-primary rounded", id:"form-btn" %>
+    </div>
+    <div id="deposit-alert"></div>
+  <% end %>
+</div>
+<script>
+  var stake = document.getElementById("challenge_stake");
+  console.log(stake);
+  var button = document.getElementById("form-btn");
+  stake.addEventListener("keyup", (event) => {
+    if (stake.value > <%= current_user.balance %> && <%= @challenge.guest.nil? %>) {
+      document.getElementById("deposit-alert").innerHTML = 'You do not have enough money in your account, please deposit ' + '<%= link_to "here", new_deposit_path %>'
+      button.disabled = true;
+      button.style.opacity = 0.2;
+    } else {
+      document.getElementById("deposit-alert").innerHTML = "";
+      button.disabled = false;
+      button.style.opacity = 1;
+    }
+    });
+</script>
+
+
